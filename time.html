@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    #currentTime {
+        font-size: 300px;
+        font-family: Bahnschrift;
+        text-align: center;
+    }
+
+    #stopOrContinue {
+        font-size: xx-large;
+        color: indianred;
+        background-color: lightpink;
+        position: absolute;
+        width: 300px;
+        height: 100px;
+        bottom: 250px;
+        left: 615px;
+        border-radius: 20px;
+    }
+
+    #stopOrContinue:hover {
+        background-color: lightgreen;
+    }
+
+    #stopOrContinue:active {
+        transform: translateY(4px);
+    }
+
+</style>
+<div id="currentTime"></div>
+<button id="stopOrContinue" onclick="stopOrContinueClock()">暂停/继续</button>
+<script>
+    var showTime;
+
+    function initTime() {
+        var now = new Date();
+        var getCurrentHour = now.getHours();
+        var getCurrentMinute = now.getMinutes();
+        var getCurrentSecond = now.getSeconds();
+        getCurrentHour = checkTime(getCurrentHour);
+        getCurrentMinute = checkTime(getCurrentMinute);
+        getCurrentSecond = checkTime(getCurrentSecond);
+        showTime = getCurrentHour + " : " + getCurrentMinute + " : " + getCurrentSecond;
+        return showTime
+    }
+
+    function checkTime(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+
+    function random(number) {
+        //获取随机数
+        return Math.floor(Math.random() * (number + 1));
+    }
+
+
+    var numberForColorChange = 0;
+
+    function getFirstTime() {
+        document.getElementById("currentTime").innerHTML = initTime();
+        document.body.style.backgroundColor = "yellow";
+        document.getElementById("currentTime").style.color = "red";
+    }
+
+    getFirstTime();
+    var getCurrentTime = function () {
+        var currentTime = initTime();
+        document.getElementById("currentTime").innerHTML = currentTime;
+        if (numberForColorChange % 2 == 0) {
+            document.body.style.backgroundColor = "red";
+            document.getElementById("currentTime").style.color = "yellow";
+        } else {
+            document.body.style.backgroundColor = "yellow";
+            document.getElementById("currentTime").style.color = "red";
+        }
+        numberForColorChange++;
+    }
+    var showNow = setInterval(getCurrentTime, 500);
+    var numberForMethod = 0;
+
+    function stopOrContinueClock() {
+        if (numberForMethod % 2 == 0) {
+            clearInterval(showNow);
+        } else {
+            showNow = setInterval(getCurrentTime, 500);
+        }
+        numberForMethod++;
+    };
+
+</script>
+</body>
+</html>
