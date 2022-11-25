@@ -47,7 +47,7 @@
         getCurrentMinute = checkTime(getCurrentMinute);
         getCurrentSecond = checkTime(getCurrentSecond);
         showTime = getCurrentHour + " : " + getCurrentMinute + " : " + getCurrentSecond;
-        return showTime
+        return showTime;
     }
 
     function checkTime(i) {
@@ -75,6 +75,7 @@
     var getCurrentTime = function () {
         var currentTime = initTime();
         document.getElementById("currentTime").innerHTML = currentTime;
+        //通过数字numberForColorChange的改变实现变色
         if (numberForColorChange % 2 == 0) {
             document.body.style.backgroundColor = "red";
             document.getElementById("currentTime").style.color = "yellow";
@@ -86,7 +87,7 @@
     }
     var showNow = setInterval(getCurrentTime, 500);
     var numberForMethod = 0;
-
+    //通过数字numberForMethod的改变实现暂停和继续功能
     function stopOrContinueClock() {
         if (numberForMethod % 2 == 0) {
             clearInterval(showNow);
